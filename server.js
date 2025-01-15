@@ -7,11 +7,12 @@ const cors = require('cors');
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY); // Replace "key" with your actual API key
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-const app = express.json();
+const app = express();
 const PORT = 3000;
 
-// Middleware
-app.use(cors());
+// Middlewareapp.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.post('/api/gemini/process/quiz', async(req, res) => {
