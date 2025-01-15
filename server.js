@@ -21,6 +21,7 @@ app.post('/api/gemini/process/quiz', async(req, res) => {
       return res.status(405).json({ error: 'Method not allowed' });
     }
 
+    console.log(req.body)
       const { text, username, password } = req.body;
 
       if(!username || !password)
