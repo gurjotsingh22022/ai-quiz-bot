@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const { GoogleGenerativeAI } = require('@google/generative-ai');
+const cors = require('cors');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY); // Replace "key" with your actual API key
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -10,22 +11,7 @@ const app = express();
 const PORT = 3000;
 
 // Middleware
-app.use(express.json());
-
-app.get('/json/text', async(req,res) => {
-  const response = {"result":{"response":{"candidates":[{"content":{"parts":[{"text":"1\n"}],"role":"model"},"finishReason":"STOP","avgLogprobs":-0.00041279103606939316}],"usageMetadata":{"promptTokenCount":132,"candidatesTokenCount":2,"totalTokenCount":134},"modelVersion":"gemini-1.5-flash"}},"success":true}
-
-  console.log(response.result.response.candidates[0].content.parts[0].text.trim())
-
-  // if (response && response.includes('text')) {
-  //   return res.status(200).json({
-  //     answer: response.replace('Answer:', '').trim(),
-  //     success: true,
-  //   });
-  // }
-
-
-})
+app.use(cors());
 
 // Routes
 app.get('/api/gemini/process/quiz', async(req, res) => {
