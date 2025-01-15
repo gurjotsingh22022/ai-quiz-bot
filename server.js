@@ -14,7 +14,7 @@ const PORT = 3000;
 app.use(cors());
 
 // Routes
-app.get('/api/gemini/process/quiz', async(req, res) => {
+app.post('/api/gemini/process/quiz', async(req, res) => {
   try {
     // Check if the request method is POST
     if (req.method !== 'POST') {
